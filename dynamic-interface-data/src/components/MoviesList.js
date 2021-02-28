@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import api from '../api'
 
 class MoviesList extends Component {
 	state = {
 		movies: []
 	}
 	componentDidMount() {
-		fetch('https://srapi.herokuapp.com/v1/movies')
-			.then((response) => {
-				// response.status
-				return response.json()
-			})
-			.then((data) => this.setState({ movies: data }))
-			.catch((error) => console.error(error))
+		api.get('/movies').then((data) => this.setState({ movies: data })).catch((error) => console.error(error))
 	}
 	render() {
 		return (

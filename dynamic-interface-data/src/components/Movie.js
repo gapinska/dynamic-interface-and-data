@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import api from '../api'
 
 class Movie extends Component {
 	state = {
@@ -6,11 +7,8 @@ class Movie extends Component {
 	}
 	componentDidMount() {
 		const { params } = this.props.match
-		fetch(`https://srapi.herokuapp.com/v1/movies/${params.id}`)
-			.then((response) => {
-				// response.status
-				return response.json()
-			})
+		api
+			.get(`/movies/${params.id}`)
 			.then((data) => this.setState({ movie: data }))
 			.catch((error) => console.error(error))
 	}
